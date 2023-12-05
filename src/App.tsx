@@ -290,7 +290,6 @@ export default function App() {
             variant="outlined"
             sx={{ mt: 2 }}
           />
-          {qrErrorMessage && <Alert severity="error">{qrErrorMessage}</Alert>}
           <Button disabled={!isValidQr} onClick={handleSubmit} fullWidth variant="contained" sx={{ mt: 3, mb: 2 }}>
             Thanh toán
           </Button>
