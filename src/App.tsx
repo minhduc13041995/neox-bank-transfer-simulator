@@ -1,6 +1,5 @@
 import CloseIcon from '@mui/icons-material/Close';
 import { Alert, Divider, Grid, Snackbar } from "@mui/material";
-import Avatar from "@mui/material/Avatar";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Container from "@mui/material/Container";
@@ -150,11 +149,11 @@ export default function App() {
   };
 
   const handleQrChange = (data: string) => {
-    console.log(data)
     const decodeData: IVietQr = decodeQr(data);
     if(decodeData.isValid) {
       setQrErrorMessage(null);
       setQrData(decodeData);
+      setAmount(parseInt(decodeData.amount, 10) || 100000);
       setIsValidQr(true);
     }
     else{
@@ -272,6 +271,7 @@ export default function App() {
             helperText={tokenErrorMessage}
             onBlur={(event: any) => handleChangeToken(event)}
           />}
+          {isValidQr && 
           <TextField
             label="Số tiền" 
             fullWidth
@@ -289,7 +289,7 @@ export default function App() {
             helperText={(amount > max || amount < min) ? "Số tiền không hợp lệ" : ""}
             variant="outlined"
             sx={{ mt: 2 }}
-          />
+          />}
           <Button disabled={!isValidQr} onClick={handleSubmit} fullWidth variant="contained" sx={{ mt: 3, mb: 2 }}>
             Thanh toán
           </Button>
