@@ -103,6 +103,7 @@ export default function App() {
   const params = new URLSearchParams(windowUrl);
   const [qrData, setQrData] = useState<IVietQr | null>();
   const [initTokenData, setInitTokenData] = useState<string | null>(params.get("accessToken"));
+  const [enviroment, setEnviroment] = useState<string | null>(params.get("env") || "sandbox");
   const [tokenData, setTokenData] = useState<string | null>(initTokenData);
   const [qrErrorMessage, setQrErrorMessage] = useState<string | null>();
   const [tokenErrorMessage, setTokenErrorMessage] = useState<string | null>();
@@ -131,7 +132,7 @@ export default function App() {
     let config = {
       method: 'post',
       maxBodyLength: Infinity,
-      url: 'https://sandbox-portal.neopay.vn/merchant/api/v1/merchant/simulation/request-bank-transfer',
+      url: `https://${enviroment}-portal.neopay.vn/merchant/api/v1/merchant/simulation/request-bank-transfer`,
       headers: { 
         'Content-Type': 'application/json'
       },
