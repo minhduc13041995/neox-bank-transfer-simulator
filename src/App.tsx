@@ -103,7 +103,6 @@ export default function App() {
   const params = new URLSearchParams(windowUrl);
   const [qrData, setQrData] = useState<IVietQr | null>();
   const [initTokenData, setInitTokenData] = useState<string | null>(params.get("accessToken"));
-  const [enviroment, setEnviroment] = useState<string | null>(params.get("env") || "sandbox");
   const [tokenData, setTokenData] = useState<string | null>(initTokenData);
   const [qrErrorMessage, setQrErrorMessage] = useState<string | null>();
   const [tokenErrorMessage, setTokenErrorMessage] = useState<string | null>();
@@ -128,7 +127,7 @@ export default function App() {
       amount: amount,
       remark: qrData?.additionalData?.purpose
     });
-    
+    const enviroment = params.get("env") || "sandbox";
     let config = {
       method: 'post',
       maxBodyLength: Infinity,
@@ -201,12 +200,6 @@ export default function App() {
 
   return (
     <ThemeProvider theme={defaultTheme}>
-      <section>
-        <div className="air air1"></div>
-        <div className="air air2"></div>
-        <div className="air air3"></div>
-        <div className="air air4"></div>
-      </section>
       <ToastContainer/>
       <Container component="main" maxWidth="xs">
       <CssBaseline />
